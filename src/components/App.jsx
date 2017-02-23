@@ -3,7 +3,7 @@ class App extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      title: ''
+      video: window.exampleVideoData[0]
     };
   }
 
@@ -20,7 +20,7 @@ class App extends React.Component {
       <div>
         <Nav />
         <div className="col-md-7">
-          <VideoPlayer video={window.exampleVideoData[0]}/>
+          <VideoPlayer video={this.state.video}/>
         </div>
         <div className="col-md-5">
           <VideoList onClick={this.onClick.bind(this)} videos={window.exampleVideoData}/>
