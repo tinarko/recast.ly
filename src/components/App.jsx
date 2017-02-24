@@ -6,16 +6,29 @@ class App extends React.Component {
       currentVideo: window.exampleVideoData[0],
       videos: window.exampleVideoData
     };
+    debugger;
+    this.handleClick = this.handleClick.bind(this);
+    this.getYouTubeVideos = this.getYouTubeVideos.bind(this);
+  }
 
+  componentDidMount() {
+    this.getYouTubeVideos('cute kittens');
+  }
+
+
+  getYouTubeVideos(query) {
     var options = {
-      key: props.API_KEY,
-      query: 'cute kittens',
+      key: this.props.API_KEY,
+      query: query,
       max: 5
     };
     
-    props.searchYouTube(options, () => {});
-
-    this.handleClick = this.handleClick.bind(this);
+    this.props.searchYouTube(options, (videos) => {
+      this.setState({
+        videos: videos,
+        currentVideo: videos[0]
+      });
+    }); 
   }
 
   handleClick(video) {
@@ -27,12 +40,12 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Nav />
+        <Nav getVideos={this.getYouTubeVideos}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
-          <VideoList handleClick={this.handleClick} videos={window.exampleVideoData}/>
+          <VideoList handleClick={this.handleClick} videos={this.state.videos}/>
         </div>
       </div>
     );
