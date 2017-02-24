@@ -3,15 +3,24 @@ class App extends React.Component {
     super(props);
     
     this.state = {
-      video: window.exampleVideoData[0]
+      currentVideo: window.exampleVideoData[0],
+      videos: window.exampleVideoData
     };
+
+    var options = {
+      key: props.API_KEY,
+      query: 'cute kittens',
+      max: 5
+    };
+    
+    props.searchYouTube(options, () => {});
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(video) {
     this.setState({
-      video: video
+      currentVideo: video
     });
   }
 
@@ -20,7 +29,7 @@ class App extends React.Component {
       <div>
         <Nav />
         <div className="col-md-7">
-          <VideoPlayer video={this.state.video}/>
+          <VideoPlayer video={this.state.currentVideo}/>
         </div>
         <div className="col-md-5">
           <VideoList handleClick={this.handleClick} videos={window.exampleVideoData}/>

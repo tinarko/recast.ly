@@ -2,7 +2,11 @@ var VideoList = (props) => {
   return (
     <div className="video-list media">
       {props.videos.map(video => (
-        <VideoListEntry handleClick={props.handleClick} video={video} />
+        <VideoListEntry 
+        handleClick={props.handleClick} 
+        video={video} 
+        key={video.id.videoId}
+        />
       ))}
     </div>
   );

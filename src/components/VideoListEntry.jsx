@@ -1,7 +1,6 @@
 var VideoListEntry = (props) => {
 
   var onClick = function(e) {
-    console.log(e);
     props.handleClick(props.video);
   };
 
@@ -11,7 +10,9 @@ var VideoListEntry = (props) => {
         <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
       </div>
       <div className="media-body">
-        <div className="video-list-entry-title" onClick={onClick}>{props.video.snippet.title}</div>
+        <div className="video-list-entry-title" 
+          onClick={onClick} 
+          >{props.video.snippet.title}</div>
         <div className="video-list-entry-detail">{props.video.snippet.description}</div>
       </div>
     </div>
